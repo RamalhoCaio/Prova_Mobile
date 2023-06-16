@@ -7,22 +7,60 @@
 // npx expo install react-native-screens react-native-safe-area-context
 // npm install @react-navigation/native-stack
 
-APP.js:
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native'
+import { Link } from '@react-navigation/native';
+
+export default function loginPage(){
+    return(
+      <View style={styles.container}>
+        <Text>BEM VINDO</Text>
+        <Link to={{screen: "dashboard"}} style={styles.caixa}>Entrar</Link>
+        <Link to={{screen: "registrar"}} style={styles.caixa}>Criar conta</Link>
+        <Link to={{screen: "esqueci"}} style={styles.caixa}>Esqueci minha senha!</Link>
+      </View>
+    );
+  }
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: '#999',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    caixa: {
+      flex: 1,
+      backgroundColor: 'yellow',
+      marginTop: '10px',
+      paddingHorizontal: '20px',
+      paddingVertical: '5px',
+      borderRadius: '10px',
+    },
+  });
+  
+  import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import pag from '../src/components/pages/loginPage/pag';
+import card from './src/components/card';
+import loginPage from './src/components/loginPage';
+import registerPage from './src/components/registerPage';
+import esqueciPage from './src/components/esqueci';
+
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      
+
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Login Page' component={pag}></Stack.Screen>
-        </Stack.Navigator>
+          <Stack.Navigator>
+            <Stack.Screen name="login" component={loginPage} options={{headerShown: false}}></Stack.Screen>
+            <Stack.Screen name="registrar" component={registerPage} options={{headerShown: false}}></Stack.Screen>
+            <Stack.Screen name="esqueci" component={esqueciPage} options={{headerShown: false}}></Stack.Screen>
+            <Stack.Screen name="dashboard" component={card} options={{headerShown: false}}></Stack.Screen>
+          </Stack.Navigator>
       </NavigationContainer>
 
     </View>
@@ -31,10 +69,84 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: '#blue',
-      alignItems: 'center',
-      justifyContent: 'center',
-  }
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Link } from '@react-navigation/native';
+
+export default function dashboardPage(){
+    return(
+      <View style={styles.container}>
+      <Link to={{screen: "login"}}>Voltar</Link>
+      <Text style={styles.titulo}>Seu Inventário</Text>
+
+      <Text>Espada</Text>
+      <Image 
+        source = {{uri:'https://img.freepik.com/vetores-premium/ilustracao-de-desenho-animado-desenhada-a-mao-de-espada_288796-1948.jpg?w=2000'}}
+        style ={styles.imagem}
+        />
+      <Text>Dano : 15           Durabilidade : 100</Text>
+      <Text style={styles.botao}>Propor troca</Text>
+      <Text></Text>
+
+      <Text>Escudo Gasto</Text>
+      <Image 
+        source = {{uri:'https://static.vecteezy.com/ti/vetor-gratis/p3/12469823-escudo-de-desenho-animado-vetor.jpg'}}
+        style ={styles.imagem}
+        />
+        <Text>Protecao : 20           Durabilidade : 43</Text>
+      <Text style={styles.botao}>Propor troca</Text>
+
+      <Text>Armadura</Text>
+      <Image 
+        source = {{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4y4bf41wADdHWCWsFWbPVBfCMnlKcMfaw6w&usqp=CAU'}}
+        style ={styles.imagem}
+        />
+        <Text>Proteção : 30           Durabilidade : 100</Text>
+      <Text style={styles.botao}>Propor troca</Text>
+      <StatusBar style="auto" />
+    </View>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#999',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    imagem: {
+      alignItems: 'center',
+      width: '100px',
+      height: '100px',
+    },
+    botao: {
+      backgroundColor: '#0390fc',
+      padding: 5,
+      color: 'white',
+      marginBottom: 30,
+    },
+    titulo: {
+      fontWeight: 'Bolder',
+      color : 'red',
+      marginBottom: 80,
+    }
+  });
+  
+  import { View, Text } from 'react-native'
+import { Link } from '@react-navigation/native';
+
+export default function registerPage(){
+    return(
+      <View>
+        <Text>registrar</Text>
+      </View>
+    );
+  }
